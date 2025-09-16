@@ -4,3 +4,21 @@
 [submodule "thirdParty/GeometricTools"]
 	path = thirdParty/GeometricTools
 	url = https://github.com/davideberly/GeometricTools.git
+[submodule "conformal_geom/CG2020"]
+	path = conformal_geom/CG2020
+	url = https://github.com/Szkered/CG2020.git
+[submodule "conformal_geom/ConformalGeometry"]
+	path = conformal_geom/ConformalGeometry
+	url = https://github.com/lilinxi/ConformalGeometry.git
+[submodule "conformal_geom/hyperbolic-ricci-flow"]
+	path = conformal_geom/hyperbolic-ricci-flow
+	url = https://github.com/IngInx747/hyperbolic-ricci-flow.git
+[submodule "conformal_geom/Conformal-Geometry"]
+	path = conformal_geom/Conformal-Geometry
+	url = https://github.com/feiii/Conformal-Geometry.git
+[submodule "conformal_geom/ComputationalGeometry_XingxinHE"]
+	path = conformal_geom/ComputationalGeometry_XingxinHE
+	url = https://github.com/XingxinHE/ComputationalGeometry.git
+[submodule "conformal_geom/Computation-Conformal-Geometry"]
+	path = conformal_geom/Computation-Conformal-Geometry
+	url = https://github.com/HerdMoon/Computation-Conformal-Geometry.git
