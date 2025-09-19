@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: lhc
  * @Date: 2025-09-16 15:41:24
- * @LastEditTime: 2025-09-16 16:10:23
+ * @LastEditTime: 2025-09-16 16:13:10
  * @LastEditors: lhc
  * @Reference: 
  */
@@ -104,10 +104,18 @@ void display(GLFWwindow* window, double currentTime)
     // 注意，glUseProgram()并没有运行着色器，它只是将着色器加载进硬件。
     glUseProgram(renderingProgram); 
     
+    // 栅格化阶段从顶点着色器收到顶点时，会设像素的颜色，组成一个尺寸为 30 像素的点
+    // glPointSize(30.0f);
+
+
+    // 呈现线框模型
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     // 发送给管线绘制的模型的顶点集
     // 调用了 glDrawArrays()用来启动管线处理过程。
     // 原始类型是GL_POINTS，仅用来显示一个点。
     glDrawArrays(GL_POINTS, 0, 1); 
+
 } 
 
 
