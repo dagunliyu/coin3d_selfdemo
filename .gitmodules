@@ -22,3 +22,6 @@
 [submodule "conformal_geom/Computation-Conformal-Geometry"]
 	path = conformal_geom/Computation-Conformal-Geometry
 	url = https://github.com/HerdMoon/Computation-Conformal-Geometry.git
+[submodule "thirdParty/glfw"]
+	path = thirdParty/glfw
+	url = https://github.com/glfw/glfw.git
