@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: lhc
  * @Date: 2025-09-16 15:41:24
- * @LastEditTime: 2025-09-16 16:13:10
+ * @LastEditTime: 2025-09-22 15:39:32
  * @LastEditors: lhc
  * @Reference: 
  */
@@ -12,11 +12,21 @@
 
 
 // 顶点着色：
-// 曲面细分着色：
-// 几何着色：
-// 栅格化：是在这个阶段，图元（点或三角形）转换成了像素的集合
+// 将vert送入管线，一次操作一个顶点的能力
 // 
-// 片段着色
+// 曲面细分着色：
+// 
+// 几何着色：
+// 给programer 一次操作一个图元的能力. 可以同时访问每个三角形的所有顶点
+// 
+// 栅格化：
+// 是在这个阶段，图元(点或三角形)转换成了像素的集合
+// 
+// 片段着色器
+// 所有fragmentShader的目的都是给要显示的像素(栅格化之后的像素)赋予颜色
+//  
+// 像素操作(利用颜色缓冲区和深度缓冲区zbuffer)
+// 隐藏面消除的步骤? 协调颜色和深度缓冲区完成
 
 
 #define numVAOs 1 
@@ -51,7 +61,15 @@ GLuint createShaderProgram()
     "void main(void) \n" 
     "{ color = vec4(0.0, 0.0, 1.0, 1.0); }";
 
-
+    // 预定义变量gl_FragCoord, 访问输入片段的坐标
+    //x 坐标小于 200时是红色，否则就是蓝色
+    const char* fshaderCoord = 
+    "#version 430 \n"
+    "out vec4 color; \n"
+    "void main(void) \n"
+    "{ if (gl_FragCoord.x < 295) color = vec4(1.0,0.0,0.0,1.0);"
+    "  else color = vec4(0.0, 0.0, 1.0, 1.0);"
+    "}";
 
     // “unsigned int”的平台无关简写
     // 创建每个着色器对象（初始值为空）的时候，会返回一个整数 ID 作为后面引用它的序号
@@ -64,7 +82,7 @@ GLuint createShaderProgram()
     // 包含源代码的字符串 指针，
     // 以及一个此处没有用到的参数（我们会在补充说明中解释这个参数）。
     glShaderSource(vShader, 1, &vshaderSource, NULL); 
-    glShaderSource(fShader, 1, &fshaderSource, NULL); 
+    glShaderSource(fShader, 1, &fshaderCoord/*fshaderSource*/, NULL); 
     
     // 编译各着色器
     glCompileShader(vShader); 
@@ -105,7 +123,8 @@ void display(GLFWwindow* window, double currentTime)
     glUseProgram(renderingProgram); 
     
     // 栅格化阶段从顶点着色器收到顶点时，会设像素的颜色，组成一个尺寸为 30 像素的点
-    // glPointSize(30.0f);
+    //增大 glPointSize
+    glPointSize(30.0f);
 
 
     // 呈现线框模型
@@ -152,3 +171,11 @@ int main(void)
     glfwTerminate(); 
     exit(EXIT_SUCCESS); 
 }
+
+// 颜色缓冲区和深度缓冲区(z-buffer)
+// GL协调这2个缓冲区，完成隐藏面的消除(即前景挡住后面的物体)
+// 这两个缓冲区的大小和屏幕栅格大小相同，屏幕上的每个像素都在这两个缓冲区里有对应的条目
+
+// 绘制场景中的每个元素时, 片段着色器会生成像素颜色
+// 像素颜色放在颜色缓冲区中， 最终颜色缓冲区被写入屏幕
+// 

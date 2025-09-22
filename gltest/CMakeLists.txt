@@ -2,6 +2,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(gltest)
 
+# 设置C++标准
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # 包含上一层级的CMake变量
 get_directory_property(PARENT_DIR PARENT_DIRECTORY)
 if(PARENT_DIR)
