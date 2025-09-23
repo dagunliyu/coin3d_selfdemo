@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: lhc
  * @Date: 2025-09-16 15:41:24
- * @LastEditTime: 2025-09-22 15:39:32
+ * @LastEditTime: 2025-09-23 10:42:33
  * @LastEditors: lhc
  * @Reference: 
  */
@@ -77,25 +77,53 @@ GLuint createShaderProgram()
     GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     // 将 GLSL 代码从字符串载入空着色器对象中
-    // 用来存放着色器的着色器对象、
-    // 着色器源代码中的字符串数量、
-    // 包含源代码的字符串 指针，
-    // 以及一个此处没有用到的参数（我们会在补充说明中解释这个参数）。
+    // para1:用来存放着色器的着色器对象、
+    // para2:着色器源代码中的字符串数量、
+    // para3:包含源代码的字符串 指针，
+    // para4:以及一个此处没有用到的参数（我们会在补充说明中解释这个参数）。
     glShaderSource(vShader, 1, &vshaderSource, NULL); 
     glShaderSource(fShader, 1, &fshaderCoord/*fshaderSource*/, NULL); 
     
-    // 编译各着色器
-    glCompileShader(vShader); 
+
+    // 编译各着色器. 捕获编译着色器时的错误
+    GLint vertCompiled;
+    GLint fragCompiled;
+    GLint linked;
+
+    glCompileShader(vShader);
+    checkOpenGLError();
+    glGetShaderiv(vShader, GL_COMPILE_STATUS, &vertCompiled);
+    if (vertCompiled != 1)
+    {
+        std::cout << "vertex compilation failed" << std::endl;
+    }
+
     glCompileShader(fShader); 
+    checkOpenGLError();
+    glGetShaderiv(fShader, GL_COMPILE_STATUS, &fragCompiled);
+    if (fragCompiled != 1)
+    {
+        std::cout << "fragment compilation failed" << std::endl;
+    }
+
+
 
     // 创建了一个叫作 vfProgram 的程序对象，并储存指向它的整数 ID
     // OpenGL“程序”object, 包含一系列编译过的着色器
     GLuint vfProgram = glCreateProgram();
     
-    // 将着色器加入程序对象
+    // 将着色器加入程序对象. 捕获链接着色器时的错误
     glAttachShader(vfProgram, vShader); 
-    glAttachShader(vfProgram, fShader); 
+    glAttachShader(vfProgram, fShader);
     
+    glLinkProgram(vfProgram);
+    checkOpenGLError();
+    glGetProgramiv(vfProgram, GL_LINK_STATUS, &linked);
+    if (linked != 1)
+    {
+        std::cout << "linking failed" << std::endl;
+    }
+     
     // 请求 GLSL 编译器，以确保它们的兼容性
     glLinkProgram(vfProgram); 
 

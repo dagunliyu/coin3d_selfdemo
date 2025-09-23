@@ -1,0 +1,9 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "unordered_set": "cpp",
+        "xmemory0": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp"
+    }
+}

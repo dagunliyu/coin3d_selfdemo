@@ -10,6 +10,12 @@ add_subdirectory(cMake/cmakeHelper) # must have a CMakeLists
 
 SetupOpenGL()
 
+
+# set bin
+if(WIN32)
+    set(BIN_DIR ${CMAKE_SOURCE_DIR}/bin CACHE PATH "Dir of bin")
+endif(WIN32)
+
 # config SDK_DIR
 add_subdirectory(sdk)
 
