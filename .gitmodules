@@ -22,6 +22,18 @@
 [submodule "conformal_geom/Computation-Conformal-Geometry"]
 	path = conformal_geom/Computation-Conformal-Geometry
 	url = https://github.com/HerdMoon/Computation-Conformal-Geometry.git
+[submodule "thirdParty/glfw"]
+	path = thirdParty/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "thirdParty/glm"]
+	path = thirdParty/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "thirdParty/glew"]
+	path = thirdParty/glew
+	url = https://github.com/nigels-com/glew.git
+[submodule "thirdParty/SOIL2"]
+	path = thirdParty/SOIL2
+	url = https://github.com/SpartanJ/SOIL2.git
 [submodule "thirdParty/icesl/anisotropic_appearance_fabrication"]
 	path = thirdParty/icesl/anisotropic_appearance_fabrication
 	url = https://github.com/mfx-inria/anisotropic_appearance_fabrication.git
