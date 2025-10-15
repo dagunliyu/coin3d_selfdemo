@@ -25,11 +25,15 @@ target_link_libraries(Prog2_5_triangle PRIVATE
     ${OPENGL_LIBRARIES}
 )
 
+message("BIN_DIR = ${BIN_DIR}")
+
 file(GLOB GLSL_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.glsl")
-add_custom_command(TARGET Prog2_5_triangle POST_BUILD
+add_custom_command(
+    TARGET Prog2_5_triangle 
+    POST_BUILD                                      # 目标构建完成后执行
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     ${GLSL_FILES}
-    $<TARGET_FILE_DIR:Prog2_5_triangle>
+    ${BIN_DIR}
 )
 
 SET_BIN_DIR(Prog2_5_triangle Prog2_5_triangle)

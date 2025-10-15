@@ -25,4 +25,13 @@ target_link_libraries(Prog2_6_animation PRIVATE
     ${OPENGL_LIBRARIES}
 )
 
+file(GLOB GLSL_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.glsl")
+add_custom_command(
+    TARGET Prog2_6_animation 
+    POST_BUILD                                      # 目标构建完成后执行
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${GLSL_FILES}
+    ${BIN_DIR}
+)
+
 SET_BIN_DIR(Prog2_6_animation Prog2_6_animation)
