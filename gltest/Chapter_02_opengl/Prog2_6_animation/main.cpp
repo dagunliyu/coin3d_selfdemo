@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "Utils.h"
 using namespace std;
 
@@ -17,9 +18,12 @@ float inc = 0.01f; // offset for moving the triangle
 
 void init(GLFWwindow* window) 
 {
+	auto startDir = Utils::GetStartupDirectory();
+	auto vsPath = startDir + "\\vertShader.glsl"; //"\\shaders\\vertShader.glsl";
+	auto fsPath = startDir + "\\fragShader.glsl";
 	renderingProgram = Utils::createShaderProgram(
-		"vertShader.glsl", 
-		"fragShader.glsl");
+		vsPath.c_str(),	//"vertShader.glsl", 
+		fsPath.c_str());//"fragShader.glsl");
 
 	glGenVertexArrays(numVAOs, vao);
 	glBindVertexArray(vao[0]);

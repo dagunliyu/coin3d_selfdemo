@@ -44,4 +44,7 @@ public:
 	static float* bronzeDiffuse();
 	static float* bronzeSpecular();
 	static float bronzeShininess();
+
+	static std::string GetStartupDirectoryCpp17();
+	static std::string GetStartupDirectory();
 };

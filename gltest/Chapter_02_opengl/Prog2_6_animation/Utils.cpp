@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtx/euler_angles.hpp>
 #include "Utils.h"
+#include <windows.h>
 using namespace std;
 
 Utils::Utils() {}
@@ -286,3 +287,33 @@ float* Utils::bronzeAmbient() { static float a[4] = { 0.2125f, 0.1275f, 0.0540f,
 float* Utils::bronzeDiffuse() { static float a[4] = { 0.7140f, 0.4284f, 0.1814f, 1 }; return (float*)a; }
 float* Utils::bronzeSpecular() { static float a[4] = { 0.3936f, 0.2719f, 0.1667f, 1 }; return (float*)a; }
 float Utils::bronzeShininess() { return 25.6f; }
+
+std::string Utils::GetStartupDirectoryCpp17()
+{
+	return std::filesystem::current_path().string();
+}
+
+std::string Utils::GetStartupDirectory()
+{
+#ifdef _WIN32
+	char buffer[MAX_PATH];
+	// 获取当前程序的完整路径
+	GetModuleFileNameA(NULL, buffer, MAX_PATH);
+	std::string fullPath(buffer);
+	// 找到最后一个反斜杠的位置
+	size_t pos = fullPath.find_last_of("\\/");
+	// 截取目录部分
+	return fullPath.substr(0, pos);
+#elif defined(__linux__)
+	char buffer[PATH_MAX];
+	ssize_t len = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
+	if (len != -1) 
+	{
+		buffer[len] = '\0';
+		std::string fullPath(buffer);
+		size_t pos = fullPath.find_last_of("/");
+		return fullPath.substr(0, pos);
+	}
+#endif
+	return "";
+}
