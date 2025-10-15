@@ -26,7 +26,9 @@ int width, height;
 float aspect;
 glm::mat4 pMat, vMat, mMat, mvMat;
 
-void setupVertices(void) {
+void setupVertices(void) 
+{
+	// 顶点数据
 	float vertexPositions[108] = {
 		-1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
 		1.0f, -1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
@@ -42,16 +44,27 @@ void setupVertices(void) {
 		1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f
 	};
 
+	// GenVertArray: 生成vao顶点数组对象
 	glGenVertexArrays(1, vao);
+
 	glBindVertexArray(vao[0]);
+	
+	// 生成vbo 顶点缓冲数组
 	glGenBuffers(numVBOs, vbo);
 
+	// 将缓冲区vbo[0] 标记为“活跃” 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+
+	
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexPositions), vertexPositions, GL_STATIC_DRAW);
 }
 
-void init(GLFWwindow* window) {
-	renderingProgram = Utils::createShaderProgram("vertShader.glsl", "fragShader.glsl");
+void init(GLFWwindow* window) 
+{
+	renderingProgram = Utils::createShaderProgram(
+		"vertShader.glsl", 
+		"fragShader.glsl");
+	
 	cameraX = 0.0f; cameraY = 0.0f; cameraZ = 8.0f;
 	cubeLocX = 0.0f; cubeLocY = -2.0f; cubeLocZ = 0.0f;
 	setupVertices();

@@ -1,9 +1,8 @@
 
-project(Prog2_5_triangle)
+project(Prog4_1_1_plainRedCube)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
-    # ${GLEW_INCLUDE_DIR}
     ${GLFW_INCLUDE_DIR}
     ${GLM_INCLUDE_DIR}
     ${SOIL2_INCLUDE_DIR}
@@ -16,20 +15,13 @@ file(GLOB SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
-add_executable(Prog2_5_triangle ${SOURCES})
+add_executable(Prog4_1_1_plainRedCube ${SOURCES})
 
-target_link_libraries(Prog2_5_triangle PRIVATE
+target_link_libraries(Prog4_1_1_plainRedCube PRIVATE
     GLEW::GLEW    # ${GLEW_LIBRARIES}
     ${GLFW_LIBRARIES}
     ${SOIL2_LIBRARIES}
     ${OPENGL_LIBRARIES}
 )
 
-file(GLOB GLSL_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.glsl")
-add_custom_command(TARGET Prog2_5_triangle POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${GLSL_FILES}
-    $<TARGET_FILE_DIR:Prog2_5_triangle>
-)
-
-SET_BIN_DIR(Prog2_5_triangle Prog2_5_triangle)
+SET_BIN_DIR(Prog4_1_1_plainRedCube Prog4_1_1_plainRedCube)
