@@ -2,22 +2,40 @@
 
 这个仓库包含使用 Coin3D 渲染引擎的示例代码，使用 CMake 进行组织。
 
+## 📚 渲染引擎分析
+
+**NEW!** 本仓库现在包含 Coin3D 渲染引擎的深入分析文档和示例代码：
+
+- **[渲染流程详细分析](docs/RENDERING_PIPELINE_ANALYSIS.md)** - 深入解析 Coin3D 如何组织场景树数据并传输到 GPU
+  - 场景图架构详解
+  - 渲染流程和遍历机制
+  - 状态管理系统
+  - GPU 数据传输方式
+  - 性能优化策略
+
+- **[渲染流程示例代码](coin3d_examples/rendering_pipeline/)** - 实际代码演示渲染流程
+  - 状态累积演示
+  - 状态隔离演示
+  - 自定义几何体和 GPU 数据传输
+  - 嵌套场景图结构
+
 ## 项目结构
 
 项目按照 Coin3D 的不同功能特性组织成不同的目录：
 
 ```
 coin3d_examples/
-├── basic_shapes/      # 基本形状示例 (球体、立方体、圆锥、圆柱)
-├── scene_graph/       # 场景图操作示例
-├── transformations/   # 变换示例 (平移、旋转、缩放)
-├── materials/         # 材质和外观示例
-├── lighting/          # 光源示例 (定向光、点光源、聚光灯)
-├── cameras/           # 相机操作示例
-├── text/              # 文本渲染示例
-├── events/            # 事件处理和交互示例
-├── file_io/           # 文件读写示例
-└── animation/         # 动画示例
+├── basic_shapes/         # 基本形状示例 (球体、立方体、圆锥、圆柱)
+├── scene_graph/          # 场景图操作示例
+├── transformations/      # 变换示例 (平移、旋转、缩放)
+├── materials/            # 材质和外观示例
+├── lighting/             # 光源示例 (定向光、点光源、聚光灯)
+├── cameras/              # 相机操作示例
+├── text/                 # 文本渲染示例
+├── events/               # 事件处理和交互示例
+├── file_io/              # 文件读写示例
+├── animation/            # 动画示例
+└── rendering_pipeline/   # 渲染流程深入分析示例 ⭐ NEW
 ```
 
 ## 依赖项
@@ -111,6 +129,9 @@ add_subdirectory(coin3d_examples)
 
 # 运行材质示例
 ./coin3d_examples/materials/materials_example
+
+# 运行渲染流程分析示例 (NEW!)
+./coin3d_examples/rendering_pipeline/rendering_pipeline_example
 ```
 
 ## 示例说明
@@ -144,6 +165,17 @@ add_subdirectory(coin3d_examples)
 
 ### 10. Animation (动画)
 演示使用引擎和定时器创建动画效果。
+
+### 11. Rendering Pipeline (渲染流程) ⭐ NEW
+**深入分析 Coin3D 渲染引擎的核心工作原理**：
+- 场景图遍历过程的可视化演示
+- 渲染状态的累积和传播机制
+- SoSeparator 的状态隔离功能
+- 自定义几何体的顶点数据传输
+- 嵌套场景图的状态管理
+- 实时打印渲染状态信息
+
+**特别说明**：此示例配合 [渲染流程详细分析文档](docs/RENDERING_PIPELINE_ANALYSIS.md) 使用，可以帮助您深入理解 Coin3D 如何将场景树数据组织并发送给 GPU。
 
 ## 故障排除
 
