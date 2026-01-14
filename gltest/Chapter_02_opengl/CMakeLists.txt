@@ -1,9 +1,0 @@
-
-
-add_subdirectory(Prog2_1_background)
-add_subdirectory(Prog2_2_point)
-add_subdirectory(Prog2_3_errorChecking)
-add_subdirectory(Prog2_4_files)
-add_subdirectory(Prog2_5_triangle)
-add_subdirectory(Prog2_6_animation)
-add_subdirectory(Prog2_supplemental_queryingOpenGL)
