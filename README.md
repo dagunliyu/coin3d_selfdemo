@@ -13,11 +13,23 @@
   - GPU 数据传输方式
   - 性能优化策略
 
+- **[渲染流程图示说明](docs/RENDERING_DIAGRAMS.md)** - 通过图示和示例帮助理解渲染流程
+  - 整体架构图
+  - 场景图结构示例
+  - 渲染流程时序图
+  - GPU 数据传输方式对比
+  - 性能优化策略示意图
+
 - **[渲染流程示例代码](coin3d_examples/rendering_pipeline/)** - 实际代码演示渲染流程
   - 状态累积演示
   - 状态隔离演示
   - 自定义几何体和 GPU 数据传输
   - 嵌套场景图结构
+
+- **[GPU数据传输示例代码](coin3d_examples/gpu_data_transfer/)** - 性能优化实践
+  - 顶点数据组织方式对比
+  - 索引优化实例
+  - 内存和性能统计
 
 ## 项目结构
 
@@ -35,7 +47,8 @@ coin3d_examples/
 ├── events/               # 事件处理和交互示例
 ├── file_io/              # 文件读写示例
 ├── animation/            # 动画示例
-└── rendering_pipeline/   # 渲染流程深入分析示例 ⭐ NEW
+├── rendering_pipeline/   # 渲染流程深入分析示例 ⭐ NEW
+└── gpu_data_transfer/    # GPU数据传输优化示例 ⭐ NEW
 ```
 
 ## 依赖项
@@ -176,6 +189,16 @@ add_subdirectory(coin3d_examples)
 - 实时打印渲染状态信息
 
 **特别说明**：此示例配合 [渲染流程详细分析文档](docs/RENDERING_PIPELINE_ANALYSIS.md) 使用，可以帮助您深入理解 Coin3D 如何将场景树数据组织并发送给 GPU。
+
+### 12. GPU Data Transfer (GPU数据传输) ⭐ NEW
+**演示不同的几何数据组织方式及其对GPU传输的影响**：
+- FaceSet vs IndexedFaceSet 内存使用对比
+- 顶点索引重用的优势
+- 复杂网格的性能优化
+- VBO (Vertex Buffer Objects) 技术
+- 实际数据传输统计和性能分析
+
+**特别说明**：通过直观的对比演示，理解如何优化几何数据以提高渲染性能。
 
 ## 故障排除
 
