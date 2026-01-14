@@ -1,0 +1,75 @@
+# Build directories
+build/
+Build/
+BUILD/
+cmake-build-*/
+out/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+!**/CMakeLists.txt
+!cmake/*.cmake
+!cMake/*.cmake
+
+# Compiled Object files
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+basic_shapes_example
+scene_graph_example
+transformations_example
+materials_example
+lighting_example
+cameras_example
+text_example
+events_example
+file_io_example
+animation_example
+MeshEditor
+
+# Qt MOC files
+moc_*
+*.moc
+qrc_*
+ui_*
+
+# IDE specific files
+.vscode/
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj*
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*.log
+
+# Temporary files
+/tmp/
+*.tmp
+*.bak
+*.orig
+
+# Package files
+*.tar.gz
+*.zip
