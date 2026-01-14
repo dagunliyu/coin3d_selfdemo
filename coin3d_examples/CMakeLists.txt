@@ -5,8 +5,10 @@ cmake_minimum_required(VERSION 3.15)
 # Add cmake modules path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cMake")
 
-# Find Coin3D library
-find_package(Coin REQUIRED)
+# Use the Coin3D built from source
+# COIN_LIBRARY, COIN_LIBRARIES, COIN_INCLUDE_DIR, COIN_INCLUDE_DIRS are already set by parent
+
+# Find SoQt library (still external for now)
 find_package(SoQt REQUIRED)
 
 # Set variables for subdirectories to use

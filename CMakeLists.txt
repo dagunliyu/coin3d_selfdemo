@@ -4,6 +4,35 @@ project(coin3d_example)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set output directories for all targets
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# For multi-config generators (Visual Studio, Xcode)
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
+endforeach()
+
+# Configure Coin3D build options
+set(COIN_BUILD_SHARED_LIBS ON CACHE BOOL "Build Coin3D as shared library")
+set(COIN_BUILD_TESTS OFF CACHE BOOL "Skip Coin3D tests")
+set(COIN_BUILD_DOCUMENTATION OFF CACHE BOOL "Skip Coin3D documentation")
+set(COIN_BUILD_EXAMPLES OFF CACHE BOOL "Skip Coin3D builtin examples")
+
+# Add Coin3D as a subdirectory
+message(STATUS "Building Coin3D from source in thirdparty/coin")
+add_subdirectory(thirdparty/coin)
+
+# Export Coin3D variables for examples to use
+set(COIN_LIBRARY Coin CACHE INTERNAL "Coin3D library target")
+set(COIN_LIBRARIES Coin CACHE INTERNAL "Coin3D library target")
+set(COIN_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/thirdparty/coin/include CACHE INTERNAL "Coin3D include directory")
+set(COIN_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/thirdparty/coin/include CACHE INTERNAL "Coin3D include directory")
+
 include(cMake)
 add_subdirectory(cMake/cmakeHelper) # must have a CMakeLists
 

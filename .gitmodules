@@ -1,0 +1,3 @@
+[submodule "thirdparty/coin"]
+	path = thirdparty/coin
+	url = https://github.com/coin3d/coin.git
