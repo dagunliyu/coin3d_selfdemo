@@ -1,0 +1,3 @@
+[submodule "external/coin"]
+	path = external/coin
+	url = https://github.com/coin3d/coin.git

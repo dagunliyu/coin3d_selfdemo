@@ -13,5 +13,5 @@ target_link_libraries(materials_example
 # Include directories
 target_include_directories(materials_example PRIVATE
     ${COIN_INCLUDE_DIRS}
-    ${SOQT_INCLUDE_DIRS}
+    # ${SOQT_INCLUDE_DIRS}
 )

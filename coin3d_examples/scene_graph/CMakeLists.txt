@@ -13,5 +13,5 @@ target_link_libraries(scene_graph_example
 # Include directories
 target_include_directories(scene_graph_example PRIVATE
     ${COIN_INCLUDE_DIRS}
-    ${SOQT_INCLUDE_DIRS}
+    # ${SOQT_INCLUDE_DIRS}
 )
