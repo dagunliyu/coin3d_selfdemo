@@ -5,5 +5,12 @@
         "xmemory0": "cpp",
         "vector": "cpp",
         "xhash": "cpp"
-    }
+    },
+    "cmake.configureSettings": {
+        "Boost_ROOT": "C:/Users/ibe/Projects/Proj_CG/ExternalLibs/FreeCAD-build/FC_LibPack/LibPack-1.1.0-v3.1.1.3-Release/lib/cmake/Boost-1.87.0",
+        // "SOQTDIR": "C:/path/to/soqt"
+    },
+    "cmake.parallelJobs": 8,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.configureOnOpen": true
 }
