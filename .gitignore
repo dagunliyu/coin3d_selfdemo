@@ -39,6 +39,8 @@ text_example
 events_example
 file_io_example
 animation_example
+dawn_triangle_demo
+dawn_shapes_demo
 MeshEditor
 
 # Qt MOC files
