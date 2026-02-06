@@ -185,10 +185,12 @@ private:
         descriptor.nextInChain = &surfaceDesc;
         return instance.CreateSurface(&descriptor);
 #elif defined(__APPLE__)
-        // macOS surface creation
+        // Note: macOS surface creation requires Objective-C code to obtain the CAMetalLayer
+        // For a complete implementation, see Dawn's official samples
+        // This is a placeholder that will fail at runtime on macOS
         wgpu::SurfaceDescriptorFromMetalLayer surfaceDesc{};
-        // Get the Metal layer from the window
-        // This requires platform-specific code
+        // surfaceDesc.layer should be set to a valid CAMetalLayer
+        // This requires calling Objective-C code from C++
         
         wgpu::SurfaceDescriptor descriptor{};
         descriptor.nextInChain = &surfaceDesc;

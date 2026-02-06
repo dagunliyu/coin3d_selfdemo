@@ -1,7 +1,8 @@
 /*
  * Dawn Shapes Demo
  * Demonstrates how to use Dawn (WebGPU) to draw various 3D shapes
- * Includes: Cube, Pyramid, and basic 3D transformations
+ * This demo renders a rotating cube with colored faces
+ * Note: Pyramid data structures are defined but not currently rendered
  */
 
 #include <webgpu/webgpu_cpp.h>
@@ -269,10 +270,12 @@ private:
         descriptor.nextInChain = &surfaceDesc;
         return instance.CreateSurface(&descriptor);
 #elif defined(__APPLE__)
-        // macOS surface creation
+        // Note: macOS surface creation requires Objective-C code to obtain the CAMetalLayer
+        // For a complete implementation, see Dawn's official samples
+        // This is a placeholder that will fail at runtime on macOS
         wgpu::SurfaceDescriptorFromMetalLayer surfaceDesc{};
-        // Get the Metal layer from the window
-        // This requires platform-specific code
+        // surfaceDesc.layer should be set to a valid CAMetalLayer
+        // This requires calling Objective-C code from C++
         
         wgpu::SurfaceDescriptor descriptor{};
         descriptor.nextInChain = &surfaceDesc;
@@ -400,12 +403,6 @@ private:
         pipelineDesc.fragment = &fragmentState;
         pipelineDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
         pipelineDesc.primitive.cullMode = wgpu::CullMode::Back;
-        
-        wgpu::DepthStencilState depthStencilState{};
-        depthStencilState.format = wgpu::TextureFormat::Depth24Plus;
-        depthStencilState.depthWriteEnabled = true;
-        depthStencilState.depthCompare = wgpu::CompareFunction::Less;
-        pipelineDesc.depthStencil = &depthStencilState;
         
         pipelineDesc.multisample.count = 1;
         pipelineDesc.multisample.mask = ~0u;
