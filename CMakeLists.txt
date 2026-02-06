@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Coin3D 构建选项
 option(BUILD_COIN_FROM_SOURCE "Build Coin3D from source" ON)
 
+# Dawn 构建选项
+option(BUILD_DAWN_EXAMPLES "Build Dawn (WebGPU) examples" ON)
+
 if(BUILD_COIN_FROM_SOURCE)
     # 设置 Coin3D 构建选项
     set(COIN_BUILD_SHARED_LIBS ON CACHE BOOL "Build Coin3D as shared library" FORCE)
@@ -33,5 +36,10 @@ SetupOpenGL()
 
 # Coin3D examples - organized by features
 add_subdirectory(coin3d_examples)
+
+# Dawn examples - WebGPU demos
+if(BUILD_DAWN_EXAMPLES)
+    add_subdirectory(dawn_examples)
+endif()
 
 # https://www.coin3d.org/quarter/

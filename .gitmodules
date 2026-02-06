@@ -1,3 +1,6 @@
 [submodule "external/coin"]
 	path = external/coin
 	url = https://github.com/coin3d/coin.git
+[submodule "external/dawn"]
+	path = external/dawn
+	url = https://github.com/google/dawn.git
