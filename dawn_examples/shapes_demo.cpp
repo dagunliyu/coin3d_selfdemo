@@ -185,13 +185,101 @@ private:
             return false;
         }
         
-        // Create surface (platform-specific code similar to triangle demo)
-        // ... (implementation depends on platform)
+        // Create surface
+        surface = createSurface();
+        if (!surface) {
+            std::cerr << "Failed to create surface" << std::endl;
+            return false;
+        }
         
-        // Request adapter and device
-        // ... (similar to triangle demo)
+        // Request adapter
+        wgpu::RequestAdapterOptions adapterOptions{};
+        adapterOptions.compatibleSurface = surface;
+        
+        auto onAdapterRequestEnded = [](WGPURequestAdapterStatus status,
+                                        WGPUAdapter adapter,
+                                        char const* message,
+                                        void* userdata) {
+            if (status == WGPURequestAdapterStatus_Success) {
+                *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(adapter);
+            } else {
+                std::cerr << "Failed to request adapter: " << message << std::endl;
+            }
+        };
+        
+        instance.RequestAdapter(&adapterOptions, onAdapterRequestEnded, &adapter);
+        
+        if (!adapter) {
+            std::cerr << "Failed to get adapter" << std::endl;
+            return false;
+        }
+        
+        // Request device
+        wgpu::DeviceDescriptor deviceDesc{};
+        
+        auto onDeviceRequestEnded = [](WGPURequestDeviceStatus status,
+                                       WGPUDevice device,
+                                       char const* message,
+                                       void* userdata) {
+            if (status == WGPURequestDeviceStatus_Success) {
+                *static_cast<wgpu::Device*>(userdata) = wgpu::Device::Acquire(device);
+            } else {
+                std::cerr << "Failed to request device: " << message << std::endl;
+            }
+        };
+        
+        adapter.RequestDevice(&deviceDesc, onDeviceRequestEnded, &device);
+        
+        if (!device) {
+            std::cerr << "Failed to get device" << std::endl;
+            return false;
+        }
+        
+        // Configure swap chain
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+        
+        wgpu::SwapChainDescriptor swapChainDesc{};
+        swapChainDesc.usage = wgpu::TextureUsage::RenderAttachment;
+        swapChainDesc.format = wgpu::TextureFormat::BGRA8Unorm;
+        swapChainDesc.width = width;
+        swapChainDesc.height = height;
+        swapChainDesc.presentMode = wgpu::PresentMode::Fifo;
+        
+        swapChain = device.CreateSwapChain(surface, &swapChainDesc);
         
         return true;
+    }
+    
+    wgpu::Surface createSurface() {
+#if defined(__linux__)
+        wgpu::SurfaceDescriptorFromXlibWindow surfaceDesc{};
+        surfaceDesc.display = glfwGetX11Display();
+        surfaceDesc.window = glfwGetX11Window(window);
+        
+        wgpu::SurfaceDescriptor descriptor{};
+        descriptor.nextInChain = &surfaceDesc;
+        return instance.CreateSurface(&descriptor);
+#elif defined(_WIN32)
+        wgpu::SurfaceDescriptorFromWindowsHWND surfaceDesc{};
+        surfaceDesc.hwnd = glfwGetWin32Window(window);
+        surfaceDesc.hinstance = GetModuleHandle(nullptr);
+        
+        wgpu::SurfaceDescriptor descriptor{};
+        descriptor.nextInChain = &surfaceDesc;
+        return instance.CreateSurface(&descriptor);
+#elif defined(__APPLE__)
+        // macOS surface creation
+        wgpu::SurfaceDescriptorFromMetalLayer surfaceDesc{};
+        // Get the Metal layer from the window
+        // This requires platform-specific code
+        
+        wgpu::SurfaceDescriptor descriptor{};
+        descriptor.nextInChain = &surfaceDesc;
+        return instance.CreateSurface(&descriptor);
+#else
+        return nullptr;
+#endif
     }
     
     bool createBuffers() {

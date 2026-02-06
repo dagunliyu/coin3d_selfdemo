@@ -2,18 +2,11 @@
 # This directory contains examples demonstrating Dawn (WebGPU) usage
 cmake_minimum_required(VERSION 3.15)
 
-# Dawn build options - disable unnecessary features for faster builds
-option(DAWN_FETCH_DEPENDENCIES "Fetch Dawn dependencies automatically" ON)
-option(DAWN_BUILD_SAMPLES "Build Dawn samples" OFF)
-option(DAWN_BUILD_NODE_BINDINGS "Build Dawn Node bindings" OFF)
-option(TINT_BUILD_TESTS "Build Tint tests" OFF)
-option(TINT_BUILD_SAMPLES "Build Tint samples" OFF)
-
 # Add Dawn library as subdirectory
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../external/dawn/CMakeLists.txt")
     message(STATUS "Building Dawn from source...")
     
-    # Set Dawn build options before adding subdirectory
+    # Set Dawn build options before adding subdirectory - disable unnecessary features for faster builds
     set(DAWN_FETCH_DEPENDENCIES ON CACHE BOOL "Fetch Dawn dependencies" FORCE)
     set(DAWN_BUILD_SAMPLES OFF CACHE BOOL "Build Dawn samples" FORCE)
     set(DAWN_BUILD_NODE_BINDINGS OFF CACHE BOOL "Build Dawn Node bindings" FORCE)
